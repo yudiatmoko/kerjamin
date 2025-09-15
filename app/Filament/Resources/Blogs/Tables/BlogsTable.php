@@ -34,7 +34,7 @@ class BlogsTable
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
-                    ->label('Tanggal Diupdate')
+                    ->label('Tanggal Diperbaharui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

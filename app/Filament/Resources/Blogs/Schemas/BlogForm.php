@@ -25,14 +25,12 @@ class BlogForm
                     ->label('Slug (untuk URL)')
                     ->required(),
 
-
                 FileUpload::make('thumbnail')
                     ->label('Gambar Thumbnail')
                     ->disk('cloudinary')
                     ->image()
                     ->maxSize(2048)
-                    ->directory('kerjamin/'),
-
+                    ->directory('kerjamin'),
 
                 RichEditor::make('content')
                     ->label('Isi Artikel')

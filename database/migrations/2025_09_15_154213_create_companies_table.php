@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('location')->nullable();
             $table->string('logo')->nullable();
-            $table->string('wesbite')->nullable();
+            $table->string('website')->nullable();
             $table->timestamps();
         });
     }

@@ -3,14 +3,10 @@
 namespace App\Filament\Resources\Blogs\Schemas;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
-use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary; // <-- IMPORT INI
-use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 
 class BlogForm
 {
@@ -35,7 +31,11 @@ class BlogForm
                 RichEditor::make('content')
                     ->label('Isi Artikel')
                     ->required()
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->fileAttachmentsDisk('cloudinary')
+                    ->fileAttachmentsDirectory('kerjamin')
+                    ->fileAttachmentsVisibility('public'),
+
                 Select::make('author_id')
                     ->label('Penulis')
                     ->relationship('author', 'name')

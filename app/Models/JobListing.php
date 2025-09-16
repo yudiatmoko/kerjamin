@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -29,6 +31,7 @@ class JobListing extends Model
 
     protected $casts = [
         'deadline' => 'date',
+        'is_active' => 'boolean'
     ];
 
     public function company(): BelongsTo
@@ -48,5 +51,35 @@ class JobListing extends Model
         return $this->belongsTo(ExperienceLevel::class, 'experience_level_id');
     }
 
+    protected static function booted(): void
+    {
+        static::deleting(function (JobListing $jobListing) {
+            if ($jobListing->attachment) {
+                $path = $jobListing->attachment;
+                $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+                $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
+                $publicId = $path;
+                if ($resourceType === 'image') {
+                    $publicId = substr($path, 0, strrpos($path, '.'));
+                }
+                Cloudinary::uploadApi()->destroy($publicId, ['resource_type' => $resourceType]);
+            }
+        });
+    }
+
+    public function getUrlAttribute(): ?string
+    {
+        return $this->attachment
+            ? "https://res.cloudinary.com/" . env('CLOUDINARY_CLOUD_NAME') . "/raw/upload/{$this->attachment}" : null;
+    }
+
+    protected function isActive(): Attribute
+    {
+        return Attribute::make(
+            get: fn() =>
+            $this->attributes['is_active'] && now() <= $this->deadline?->endOfDay(),
+        );
+    }
 
 }

@@ -15,25 +15,24 @@ class CompaniesTable
     {
         return $table
             ->columns([
+                ImageColumn::make('logo')
+                    ->label('Logo')
+                    ->disk('cloudinary')
+                    ->width(width: 80)
+                    ->height(height: 40),
                 TextColumn::make('name')
                     ->label('Nama Perusahaan')
                     ->searchable(),
                 TextColumn::make('location')
                     ->label('Lokasi')
                     ->searchable(),
-                ImageColumn::make('logo')
-                    ->label('Logo')
-                    ->disk('cloudinary')
-                    ->width(width: 80)
-                    ->height(height: 40),
                 TextColumn::make('website')
                     ->label('Website')
                     ->icon(fn(?string $state): ?string => $state ? 'heroicon-o-link' : null)
                     ->color('primary')
                     ->url(fn(?string $state): ?string => $state)
                     ->openUrlInNewTab()
-                    ->formatStateUsing(fn(?string $state): string => $state ? 'Kunjungi Website' : '-')
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->formatStateUsing(fn(?string $state): string => $state ? 'Kunjungi Website' : '-'),
                 TextColumn::make('created_at')
                     ->label('Tanggal Dibuat')
                     ->dateTime()

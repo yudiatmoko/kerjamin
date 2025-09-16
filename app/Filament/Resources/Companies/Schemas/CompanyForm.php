@@ -22,18 +22,15 @@ class CompanyForm
                     ->disk('cloudinary')
                     ->image()
                     ->maxSize(2048)
-                    ->directory('kerjamin'),
-                RichEditor::make('description')
-                    ->label('Deskripsi')
-                    ->columnSpanFull()
-                    ->fileAttachmentsDisk('cloudinary')
-                    ->fileAttachmentsDirectory('kerjamin')
-                    ->fileAttachmentsVisibility('public'),
-                TextInput::make('location')
-                    ->label('Lokasi'),
-                TextInput::make('website')
-                    ->label('Website')
-                    ->url(),
+                    ->directory('kerjamin')
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '4:3',
+                        '1:1',
+                    ]),
+                TextInput::make('location')->label('Lokasi'),
+                TextInput::make('website')->label('Website')->url(),
+                RichEditor::make('description')->label('Deskripsi')->columnSpanFull()->fileAttachmentsDisk('cloudinary')->fileAttachmentsDirectory('kerjamin')->fileAttachmentsVisibility('public'),
             ]);
     }
 }

@@ -26,8 +26,12 @@ class BlogForm
                     ->disk('cloudinary')
                     ->image()
                     ->maxSize(2048)
-                    ->directory('kerjamin'),
-
+                    ->directory('kerjamin')
+                    ->imageEditor()
+                    ->imageEditorAspectRatios([
+                        '4:3',
+                        '16:9',
+                    ]),
                 RichEditor::make('content')
                     ->label('Isi Artikel')
                     ->required()

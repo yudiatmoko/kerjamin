@@ -66,6 +66,7 @@ return [
             'secret' => env('CLOUDINARY_SECRET'),
             'cloud' => env('CLOUDINARY_CLOUD_NAME'),
             'url' => env('CLOUDINARY_URL'),
+            'resource_type' => 'auto',
         ],
     ],
 

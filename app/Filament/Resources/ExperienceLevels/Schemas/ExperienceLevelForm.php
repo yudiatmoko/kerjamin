@@ -12,8 +12,10 @@ class ExperienceLevelForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->label('Nama')
                     ->required(),
                 TextInput::make('slug')
+                    ->label('Slug (untuk URL)')
                     ->required(),
             ]);
     }

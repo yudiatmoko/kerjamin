@@ -32,7 +32,8 @@ class CompanyForm
                 TextInput::make('location')
                     ->label('Lokasi'),
                 TextInput::make('website')
-                    ->label('Website'),
+                    ->label('Website')
+                    ->url(),
             ]);
     }
 }

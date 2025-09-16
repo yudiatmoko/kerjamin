@@ -15,7 +15,7 @@ class CategoryForm
                     ->label('Nama')
                     ->required(),
                 TextInput::make('slug')
-                    ->label('Slug')
+                    ->label('Slug (untuk URL)')
                     ->required(),
                 TextInput::make('icon')
                     ->label('Ikon')

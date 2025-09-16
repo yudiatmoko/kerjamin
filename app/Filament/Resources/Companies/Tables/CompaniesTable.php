@@ -28,12 +28,19 @@ class CompaniesTable
                     ->height(height: 40),
                 TextColumn::make('website')
                     ->label('Website')
-                    ->searchable(),
+                    ->icon(fn(?string $state): ?string => $state ? 'heroicon-o-link' : null)
+                    ->color('primary')
+                    ->url(fn(?string $state): ?string => $state)
+                    ->openUrlInNewTab()
+                    ->formatStateUsing(fn(?string $state): string => $state ? 'Kunjungi Website' : '-')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
+                    ->label('Tanggal Dibuat')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('Tanggal Diperbaharui')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

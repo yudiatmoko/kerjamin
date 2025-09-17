@@ -26,6 +26,8 @@ class CompanyResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Perusahaan';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Schema $schema): Schema
     {
         return CompanyForm::configure($schema);

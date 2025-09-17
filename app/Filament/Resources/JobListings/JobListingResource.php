@@ -26,6 +26,8 @@ class JobListingResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Lowongan Kerja';
 
+    protected static ?int $navigationSort = 6;
+
     public static function form(Schema $schema): Schema
     {
         return JobListingForm::configure($schema);

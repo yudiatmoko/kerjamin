@@ -2,6 +2,12 @@
 
 namespace App\Filament\Resources\JobListings\Schemas;
 
+use App\Filament\Resources\Categories\CategoryResource;
+use App\Filament\Resources\Companies\CompanyResource;
+use App\Filament\Resources\Education\EducationResource;
+use App\Filament\Resources\ExperienceLevels\ExperienceLevelResource;
+use App\Filament\Resources\JobTypes\JobTypeResource;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
@@ -20,27 +26,47 @@ class JobListingForm
                 TextInput::make('title')
                     ->label('Posisi Lowongan')
                     ->required(),
+
                 Select::make('company_id')
                     ->label('Perusahaan')
                     ->relationship('company', 'name')
+                    ->native(false)
+                    ->preload()
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->suffixAction(
+                        fn() => Action::make('create-company')
+                            ->label('Tambah')
+                            ->icon('heroicon-o-plus')
+                            ->url(CompanyResource::getUrl('create'), shouldOpenInNewTab: true)
+                    ),
                 TextInput::make('location')
                     ->label('Lokasi')
                     ->required(),
-                Select::make('job_type')
+                Select::make('job_type_id')
                     ->label('Jenis Pekerjaan')
-                    ->options([
-                        'Penuh Waktu' => 'Penuh Waktu',
-                        'Paruh Waktu' => 'Paruh Waktu',
-                        'Magang' => 'Magang',
-                        'Kontrak' => 'Kontrak',
-                    ])
-                    ->required(),
+                    ->relationship('jobType', 'name')
+                    ->preload()
+                    ->searchable()
+                    ->required()
+                    ->suffixAction(
+                        fn() => Action::make('create-job-type')
+                            ->label('Tambah')
+                            ->icon('heroicon-o-plus')
+                            ->url(JobTypeResource::getUrl('create'), shouldOpenInNewTab: true)
+                    ),
                 Select::make('education_id')
                     ->label('Pendidikan Minimal')
                     ->relationship('education', 'name')
-                    ->required(),
+                    ->preload()
+                    ->searchable()
+                    ->required()
+                    ->suffixAction(
+                        fn() => Action::make('create-education')
+                            ->label('Tambah')
+                            ->icon('heroicon-o-plus')
+                            ->url(EducationResource::getUrl('create'), shouldOpenInNewTab: true)
+                    ),
                 DatePicker::make('deadline')
                     ->label('Tenggat Waktu')
                     ->displayFormat('d-m-Y')
@@ -53,12 +79,27 @@ class JobListingForm
                 Select::make('category_id')
                     ->label('Kategori')
                     ->relationship('category', 'name')
+                    ->preload()
                     ->searchable()
-                    ->required(),
+                    ->required()
+                    ->suffixAction(
+                        fn() => Action::make('create-category')
+                            ->label('Tambah')
+                            ->icon('heroicon-o-plus')
+                            ->url(CategoryResource::getUrl('create'), shouldOpenInNewTab: true)
+                    ),
                 Select::make('experience_level_id')
                     ->label('Tingkat Pengalaman')
                     ->relationship('experienceLevel', 'name')
-                    ->required(),
+                    ->preload()
+                    ->searchable()
+                    ->required()
+                    ->suffixAction(
+                        fn() => Action::make('create-experience-level')
+                            ->label('Tambah')
+                            ->icon('heroicon-o-plus')
+                            ->url(ExperienceLevelResource::getUrl('create'), shouldOpenInNewTab: true)
+                    ),
                 TextInput::make('application_link')
                     ->label('Tautan Lamaran')
                     ->url()

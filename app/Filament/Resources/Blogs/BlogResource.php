@@ -26,6 +26,8 @@ class BlogResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Blog';
 
+    protected static ?int $navigationSort = 7;
+
     public static function form(Schema $schema): Schema
     {
         return BlogForm::configure($schema);

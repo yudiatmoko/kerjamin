@@ -26,6 +26,8 @@ class ExperienceLevelResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Tingkat Pengalaman';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Schema $schema): Schema
     {
         return ExperienceLevelForm::configure($schema);

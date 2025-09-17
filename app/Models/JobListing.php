@@ -16,7 +16,7 @@ class JobListing extends Model
         'title',
         'description',
         'qualification',
-        'job_type',
+        'job_type_id',
         'location',
         'deadline',
         'application_link',
@@ -49,6 +49,11 @@ class JobListing extends Model
     public function experienceLevel(): BelongsTo
     {
         return $this->belongsTo(ExperienceLevel::class, 'experience_level_id');
+    }
+
+    public function jobType(): BelongsTo
+    {
+        return $this->belongsTo(JobType::class);
     }
 
     protected static function booted(): void

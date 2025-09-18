@@ -1,10 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Hash;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,17 +10,38 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@kerjamin.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('securepassword'),
+        $this->call([
+            UserSeeder::class,
         ]);
 
         $this->call([
             BlogSeeder::class,
         ]);
+
+        $this->call([
+            CategorySeeder::class,
+        ]);
+
+        $this->call([
+            CompanySeeder::class,
+        ]);
+
+        $this->call([
+            EducationSeeder::class,
+        ]);
+
+        $this->call([
+            ExperienceLevelSeeder::class,
+        ]);
+
+        $this->call([
+            JobTypeSeeder::class,
+        ]);
+        
+        $this->call([
+            JobListingSeeder::class,
+        ]);
+
     }
 }

@@ -53,7 +53,7 @@ class JobListing extends Model
 
     public function jobType(): BelongsTo
     {
-        return $this->belongsTo(JobType::class);
+        return $this->belongsTo(JobType::class, 'job_type_id');
     }
 
     protected static function booted(): void
@@ -75,9 +75,19 @@ class JobListing extends Model
 
     public function getUrlAttribute(): ?string
     {
-        return $this->attachment
-            ? "https://res.cloudinary.com/" . env('CLOUDINARY_CLOUD_NAME') . "/raw/upload/{$this->attachment}" : null;
+        if (!$this->attachment) {
+            return null;
+        }
+
+        $extension = strtolower(pathinfo($this->attachment, PATHINFO_EXTENSION));
+        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+        $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
+
+        return "https://res.cloudinary.com/" . env('CLOUDINARY_CLOUD_NAME') .
+            "/{$resourceType}/upload/{$this->attachment}";
     }
+
 
     protected function isActive(): Attribute
     {

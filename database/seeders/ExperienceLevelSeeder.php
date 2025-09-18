@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Blog;
+use App\Models\ExperienceLevel;
 use Illuminate\Database\Seeder;
 
-class BlogSeeder extends Seeder
+class ExperienceLevelSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Blog::factory(5)->create();
+        ExperienceLevel::factory(4)->create();
     }
 }

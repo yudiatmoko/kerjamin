@@ -6,10 +6,8 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\Storage;
 
 class JobListingsTable
 {
@@ -26,7 +24,7 @@ class JobListingsTable
                 TextColumn::make('location')
                     ->label('Lokasi')
                     ->searchable(),
-                TextColumn::make('job_type')
+                TextColumn::make('jobType.name')
                     ->label('Jenis Pekerjaan')
                     ->searchable(),
                 TextColumn::make('education.name')
@@ -57,10 +55,16 @@ class JobListingsTable
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('attachment')
                     ->label('Lampiran')
-                    ->url(
-                        fn(?string $state): ?string =>
-                        $state ? "https://res.cloudinary.com/" . env('CLOUDINARY_CLOUD_NAME') . "/raw/upload/{$state}" : null
-                    )
+                    ->url(function (?string $state): ?string {
+                        if (!$state) {
+                            return null;
+                        }
+                        $cloudName = env('CLOUDINARY_CLOUD_NAME');
+                        $extension = strtolower(pathinfo($state, PATHINFO_EXTENSION));
+                        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
+                        return "https://res.cloudinary.com/{$cloudName}/{$resourceType}/upload/{$state}";
+                    })
                     ->icon(fn(?string $state): ?string => $state ? 'heroicon-o-link' : null)
                     ->color('primary')
                     ->openUrlInNewTab()

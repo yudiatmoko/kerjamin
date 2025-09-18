@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class JobListingResource extends Resource
 {
@@ -27,6 +28,16 @@ class JobListingResource extends Resource
     protected static ?string $pluralModelLabel = 'Lowongan Kerja';
 
     protected static ?int $navigationSort = 6;
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['title'];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string
+    {
+        return $record->title;
+    }
 
     public static function form(Schema $schema): Schema
     {

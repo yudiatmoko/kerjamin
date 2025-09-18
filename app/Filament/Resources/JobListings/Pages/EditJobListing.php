@@ -27,13 +27,8 @@ class EditJobListing extends EditRecord
     {
         $record = $this->getRecord();
 
-        // Cek jika ada lampiran baru DAN lampiran lama ada
         if ($data['attachment'] !== $record->attachment && $record->attachment !== null) {
             $oldPath = $record->attachment;
-
-            // ▼▼▼ LOGIKA PINTAR DIMULAI DI SINI ▼▼▼
-
-            // 1. Cek ekstensi untuk menentukan tipe resource
             $extension = strtolower(pathinfo($oldPath, PATHINFO_EXTENSION));
             $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
             $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';

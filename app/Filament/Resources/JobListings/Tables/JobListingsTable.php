@@ -68,7 +68,7 @@ class JobListingsTable
                     ->icon(fn(?string $state): ?string => $state ? 'heroicon-o-link' : null)
                     ->color('primary')
                     ->openUrlInNewTab()
-                    ->formatStateUsing(fn($state) => $state ? 'Lihat/Unduh File' : '-')
+                    ->formatStateUsing(fn($state) => $state ? 'Lihat File' : '-')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('views_count')
                     ->label('Jumlah Dilihat')

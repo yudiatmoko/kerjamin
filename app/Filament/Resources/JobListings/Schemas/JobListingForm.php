@@ -104,25 +104,19 @@ class JobListingForm
                     ->label('Tautan Lamaran')
                     ->url()
                     ->required(),
-                Group::make()
-                    ->schema([
-                        FileUpload::make('attachment')
-                            ->label('Lampiran (Opsional)')
-                            ->disk('cloudinary')
-                            ->acceptedFileTypes(['image/*', 'application/pdf'])
-                            ->maxSize(2048)
-                            ->directory('kerjamin')
-                            ->visibility('public'),
 
-                        MediaAction::make('attachment_viewer')
-                            ->label('Lihat Lampiran Saat Ini')
-                            ->icon('heroicon-o-document-magnifying-glass')
-                            ->color('primary')
-                            ->media(fn($record) => $record->url)
-                            ->visible(fn($record) => $record
-                                && $record->attachment
-                                && str_ends_with(strtolower($record->attachment), '.pdf'))
-                    ]),
+                FileUpload::make('attachment')
+                    ->label('Lampiran Gambar (Opsional)')
+                    ->multiple()
+                    ->reorderable()
+                    ->appendFiles()
+                    ->disk('cloudinary')
+                    ->acceptedFileTypes(['image/*'])
+                    ->directory('kerjamin')
+                    ->maxSize(2048)
+                    ->visibility('public')
+                    ->columnSpanFull(),
+
                 Toggle::make('is_active')
                     ->label('Status Aktif (Tampilkan Lowongan)')
                     ->default(true),

@@ -18,18 +18,16 @@ class JobListingFactory extends Factory
      */
     public function definition(): array
     {
-        $attachments = [
-            'kerjamin/01K5E2184CFBPMZSE8NFRPF5N4.pdf',
-            'kerjamin/01K5E1Y9MYZ70JHBWT0ADR9EMB.pdf',
-            'kerjamin/01K5E249HNJXT01KHK808ZQ2ZB.pdf',
+        $availableAttachments = [
             'it-service-desk-v2_ajs1j0.png',
             'marketing-support-v1_r6sebs.png',
             'desk-sales-v1_jawfjg.png',
         ];
 
-        $attachmentPath = fake()->boolean(70)
-            ? fake()->randomElement($attachments)
-            : null;
+        $selectedAttachments = fake()->randomElements(
+            $availableAttachments,
+            fake()->numberBetween(0, 3) 
+        );
 
         return [
             'title' => fake()->jobTitle(),
@@ -38,10 +36,9 @@ class JobListingFactory extends Factory
             'location' => fake()->city() . ', ' . fake()->state(),
             'deadline' => fake()->dateTimeBetween('+1 week', '+1 months'),
             'application_link' => fake()->url(),
-            'attachment' => $attachmentPath,
+            'attachment' => $selectedAttachments,
             'is_active' => fake()->boolean(80),
             'views_count' => fake()->numberBetween(50, 2500),
-
             'company_id' => Company::inRandomOrder()->first()->id,
             'category_id' => Category::inRandomOrder()->first()->id,
             'education_id' => Education::inRandomOrder()->first()->id,

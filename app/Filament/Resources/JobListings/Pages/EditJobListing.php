@@ -25,18 +25,14 @@ class EditJobListing extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        $record = $this->getRecord();
 
-        if ($data['attachment'] !== $record->attachment && $record->attachment !== null) {
-            $oldPath = $record->attachment;
-            $extension = strtolower(pathinfo($oldPath, PATHINFO_EXTENSION));
-            $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-            $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
-            $publicId = $oldPath;
-            if ($resourceType === 'image') {
-                $publicId = substr($oldPath, 0, strrpos($oldPath, '.'));
-            }
-            Cloudinary::uploadApi()->destroy($publicId, ['resource_type' => $resourceType]);
+        $record = $this->getRecord();
+        $oldAttachments = $record->attachment ?? [];
+        $newAttachments = $data['attachment'] ?? [];
+        $filesToDelete = array_diff($oldAttachments, $newAttachments);
+        foreach ($filesToDelete as $path) {
+            $publicId = substr($path, 0, strrpos($path, '.'));
+            Cloudinary::uploadApi()->destroy($publicId, ['resource_type' => 'image']);
         }
 
         return $data;

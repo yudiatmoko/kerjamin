@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email' => 'admin' . $counter++ . '@kerjamin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('securepassword'),
+            'role' => 'admin',
             'remember_token' => Str::random(10),
         ];
     }

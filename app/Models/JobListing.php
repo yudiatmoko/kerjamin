@@ -31,21 +31,25 @@ class JobListing extends Model
 
     protected $casts = [
         'deadline' => 'date',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
+        'attachment' => 'array',
     ];
 
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
     public function education(): BelongsTo
     {
         return $this->belongsTo(Education::class, 'education_id');
     }
+
     public function experienceLevel(): BelongsTo
     {
         return $this->belongsTo(ExperienceLevel::class, 'experience_level_id');
@@ -59,35 +63,14 @@ class JobListing extends Model
     protected static function booted(): void
     {
         static::deleting(function (JobListing $jobListing) {
-            if ($jobListing->attachment) {
-                $path = $jobListing->attachment;
-                $extension = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-                $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-                $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
-                $publicId = $path;
-                if ($resourceType === 'image') {
+            if (!empty($jobListing->attachment)) {
+                foreach ($jobListing->attachment as $path) {
                     $publicId = substr($path, 0, strrpos($path, '.'));
+                    Cloudinary::uploadApi()->destroy($publicId, ['resource_type' => 'image']);
                 }
-                Cloudinary::uploadApi()->destroy($publicId, ['resource_type' => $resourceType]);
             }
         });
     }
-
-    public function getUrlAttribute(): ?string
-    {
-        if (!$this->attachment) {
-            return null;
-        }
-
-        $extension = strtolower(pathinfo($this->attachment, PATHINFO_EXTENSION));
-        $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-
-        $resourceType = in_array($extension, $imageExtensions) ? 'image' : 'raw';
-
-        return "https://res.cloudinary.com/" . env('CLOUDINARY_CLOUD_NAME') .
-            "/{$resourceType}/upload/{$this->attachment}";
-    }
-
 
     protected function isActive(): Attribute
     {
@@ -96,5 +79,5 @@ class JobListing extends Model
             $this->attributes['is_active'] && now() <= $this->deadline?->endOfDay(),
         );
     }
-
 }
+

@@ -9,6 +9,7 @@ use App\Filament\Resources\JobListings\Schemas\JobListingForm;
 use App\Filament\Resources\JobListings\Tables\JobListingsTable;
 use App\Models\JobListing;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,6 +29,8 @@ class JobListingResource extends Resource
     protected static ?string $pluralModelLabel = 'Lowongan Kerja';
 
     protected static ?int $navigationSort = 6;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Lowongan';
 
     public static function getGloballySearchableAttributes(): array
     {

@@ -9,6 +9,7 @@ use App\Filament\Resources\Blogs\Schemas\BlogForm;
 use App\Filament\Resources\Blogs\Tables\BlogsTable;
 use App\Models\Blog;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,6 +29,8 @@ class BlogResource extends Resource
     protected static ?string $pluralModelLabel = 'Blog';
 
     protected static ?int $navigationSort = 7;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Blog';
 
     public static function getGloballySearchableAttributes(): array
     {

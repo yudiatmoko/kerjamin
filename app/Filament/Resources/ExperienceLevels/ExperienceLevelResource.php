@@ -9,6 +9,7 @@ use App\Filament\Resources\ExperienceLevels\Schemas\ExperienceLevelForm;
 use App\Filament\Resources\ExperienceLevels\Tables\ExperienceLevelsTable;
 use App\Models\ExperienceLevel;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,6 +29,8 @@ class ExperienceLevelResource extends Resource
     protected static ?string $pluralModelLabel = 'Tingkat Pengalaman';
 
     protected static ?int $navigationSort = 4;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Lowongan';
 
     public static function getGloballySearchableAttributes(): array
     {

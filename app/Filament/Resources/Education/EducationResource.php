@@ -9,6 +9,7 @@ use App\Filament\Resources\Education\Schemas\EducationForm;
 use App\Filament\Resources\Education\Tables\EducationTable;
 use App\Models\Education;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,6 +29,8 @@ class EducationResource extends Resource
     protected static ?string $pluralModelLabel = 'Pendidikan';
 
     protected static ?int $navigationSort = 2;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Lowongan';
 
     public static function getGloballySearchableAttributes(): array
     {

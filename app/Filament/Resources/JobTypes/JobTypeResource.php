@@ -9,6 +9,7 @@ use App\Filament\Resources\JobTypes\Schemas\JobTypeForm;
 use App\Filament\Resources\JobTypes\Tables\JobTypesTable;
 use App\Models\JobType;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -28,6 +29,9 @@ class JobTypeResource extends Resource
     protected static ?string $pluralModelLabel = 'Tipe Pekerjaan';
 
     protected static ?int $navigationSort = 3;
+
+    protected static string|UnitEnum|null $navigationGroup = 'Manajemen Lowongan';
+
 
     public static function getGloballySearchableAttributes(): array
     {

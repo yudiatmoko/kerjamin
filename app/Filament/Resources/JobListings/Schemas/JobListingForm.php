@@ -17,6 +17,7 @@ use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Schema;
 use Hugomyb\FilamentMediaAction\Actions\MediaAction;
+
 class JobListingForm
 {
     public static function configure(Schema $schema): Schema

@@ -8,7 +8,7 @@
             <a href="{{ route('home.index') }}" class="py-2 text-base transition duration-200 {{ request()->is('/') ? 'font-bold text-white' : 'font-medium opacity-60 hover:opacity-80' }}">Beranda</a>
             <a href="{{ route('jobs.index') }}" class="py-2 text-base transition duration-200 {{ request()->is('lowongan-kerja*') ? 'font-bold text-white' : 'font-medium opacity-60 hover:opacity-80' }}">Lowongan Kerja</a>
             <a href="{{ route('blogs.index') }}" class="py-2 text-base transition duration-200 {{ request()->is('blog*') ? 'font-bold text-white' : 'font-medium opacity-60 hover:opacity-80' }}">Blog</a>
-            <a href="{{ route('about') }}" class="py-2 text-base transition duration-200 {{ request()->is('tentang-kami') ? 'font-bold text-white' : 'font-medium opacity-60 hover:opacity-80' }}">Tentang Kami</a>
+            <a href="{{ route('about.index') }}" class="py-2 text-base transition duration-200 {{ request()->is('tentang-kami') ? 'font-bold text-white' : 'font-medium opacity-60 hover:opacity-80' }}">Tentang Kami</a>
         </div>
 
         <div class="hidden md:block">
@@ -29,7 +29,7 @@
             <a href="{{ route('home.index') }}" class="text-base {{ request()->is('/') ? 'font-bold text-white' : 'font-medium opacity-60' }}">Beranda</a>
             <a href="{{ route('jobs.index') }}" class="text-base {{ request()->is('lowongan-kerja*') ? 'font-bold text-white' : 'font-medium opacity-60' }}">Lowongan Kerja</a>
             <a href="{{ route('blogs.index') }}" class="text-base {{ request()->is('blog*') ? 'font-bold text-white' : 'font-medium opacity-60' }}">Blog</a>
-            <a href="{{ route('about') }}" class="text-base {{ request()->is('tentang-kami') ? 'font-bold text-white' : 'font-medium opacity-60' }}">Tentang Kami</a>
+            <a href="{{ route('about.index') }}" class="text-base {{ request()->is('tentang-kami') ? 'font-bold text-white' : 'font-medium opacity-60' }}">Tentang Kami</a>
         </div>
     </div>
 </header>

@@ -25,6 +25,28 @@ class HomeController extends Controller
 
     public function index(): View
     {
-        return view('pages.home.index', $this->getSearchData());
+
+        $latestJobs = JobListing::with(['company', 'category', 'jobType', 'education'])
+            ->where('is_active', true)
+            ->latest()
+            ->take(10)
+            ->get();
+
+        $categories = Category::withCount('jobListings')
+            ->whereHas('jobListings', function ($query) {
+                $query->where('is_active', true);
+            })
+            ->orderBy('name')
+            ->get();
+
+        $viewData = array_merge(
+            $this->getSearchData(),
+            ['latestJobs' => $latestJobs],
+            ['categories' => $categories],
+        );
+
+        return view('pages.home.index', $viewData);
+
+        // return view('pages.home.index', $this->getSearchData());
     }
 }

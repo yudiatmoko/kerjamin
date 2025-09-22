@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Education;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -37,6 +38,12 @@ class JobListingController extends Controller
             return $q->where('location', 'like', "%{$location}%");
         });
 
+        $query->when($request->education, function ($q, $educationSlug) {
+            return $q->whereHas('education', function ($educationQuery) use ($educationSlug) {
+                $educationQuery->where('slug', $educationSlug);
+            });
+        });
+
         $query->when($request->category, function ($q, $categorySlug) {
             return $q->whereHas('category', function ($categoryQuery) use ($categorySlug) {
                 $categoryQuery->where('slug', $categorySlug);
@@ -48,14 +55,14 @@ class JobListingController extends Controller
 
     private function getSearchData(): array
     {
-        $categories = Category::orderBy('name')->get();
+        $educations = Education::orderBy('name')->get();
         $locations = JobListing::select('location')
             ->distinct()
             ->orderBy('location')
             ->pluck('location');
 
         return [
-            'searchCategories' => $categories,
+            'searchEducations' => $educations,
             'searchLocations' => $locations,
         ];
     }

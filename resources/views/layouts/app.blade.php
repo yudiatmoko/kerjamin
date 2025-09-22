@@ -12,15 +12,15 @@
 
 </head>
 <body class="bg-gray-100 text-gray-800">
-    {{-- Memuat Navbar --}}
+    {{-- Navbar --}}
     @include('components.navbar')
 
-    {{-- Konten Utama yang akan diisi oleh setiap halaman --}}
+    {{-- Konten Utama --}}
     <main>
         @yield('content')
     </main>
 
-    {{-- Memuat Footer --}}
+    {{-- Footer --}}
     @include('components.footer')
 </body>
 </html>

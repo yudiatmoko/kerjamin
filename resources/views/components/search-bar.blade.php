@@ -23,12 +23,12 @@
             </div>
 
             <div class="w-full p-3 flex-3 relative">
-                <select name="category" class="w-full text-base font-medium text-gray-800 bg-white border-b-2 border-gray-200 
+                <select name="education" class="w-full text-base font-medium text-gray-800 bg-white border-b-2 border-gray-200 
                md:border-b-0 md:border-r-3 focus:outline-none focus:border-primary transition duration-300 
                appearance-none pr-6 truncate">
-                    <option value="">Semua Kategori</option>
-                    @foreach ($searchCategories as $category)
-                    <option value="{{ $category->slug }}">{{ $category->name }}</option>
+                    <option value="">Semua Pendidikan</option>
+                    @foreach ($searchEducations as $education)
+                    <option value="{{ $education->slug }}">{{ $education->name }}</option>
                     @endforeach
                 </select>
 

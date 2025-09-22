@@ -10,4 +10,8 @@
 
 @include('pages.home.section.category', ['categories' => $categories])
 
+@include('pages.home.section.ads')
+
+@include('pages.home.section.education', ['jobsByEducation' => $jobsByEducation])
+
 @endsection

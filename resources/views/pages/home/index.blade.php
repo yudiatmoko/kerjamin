@@ -6,12 +6,14 @@
 
 @include('pages.home.section.hero')
 
-@include('pages.home.section.latest-job', ['latestJobs' => $latestJobs])
+@include('pages.home.section.latest-jobs', ['latestJobs' => $latestJobs])
 
-@include('pages.home.section.category', ['categories' => $categories])
+@include('pages.home.section.categories', ['categories' => $categories])
 
 @include('pages.home.section.ads')
 
-@include('pages.home.section.education', ['jobsByEducation' => $jobsByEducation])
+@include('pages.home.section.educations', ['jobsByEducation' => $jobsByEducation])
+
+@include('pages.home.section.blogs', ['latestBlogs' => $latestBlogs])
 
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Education;
 use App\Models\JobListing;
@@ -13,7 +14,7 @@ class HomeController extends Controller
     {
         $educations = Education::orderByRaw("
             CASE name
-                WHEN 'SMA/SMK' THEN 1
+                WHEN 'SMA/SMK Sederajat' THEN 1
                 WHEN 'Diploma (D3)' THEN 2
                 WHEN 'Sarjana (S1)' THEN 3
                 WHEN 'Magister (S2)' THEN 4
@@ -51,7 +52,7 @@ class HomeController extends Controller
 
         $educationLevels = Education::orderByRaw("
             CASE name
-                WHEN 'SMA/SMK' THEN 1
+                WHEN 'SMA/SMK Sederajat' THEN 1
                 WHEN 'Diploma (D3)' THEN 2
                 WHEN 'Sarjana (S1)' THEN 3
                 WHEN 'Magister (S2)' THEN 4
@@ -75,11 +76,15 @@ class HomeController extends Controller
             }
         }
 
+        $latestBlogs = Blog::latest()->take(2)->get();
+
         $viewData = array_merge(
             $this->getSearchData(),
             ['latestJobs' => $latestJobs],
             ['categories' => $categories],
             ['jobsByEducation' => $jobsByEducation],
+            ['latestBlogs' => $latestBlogs],
+
         );
 
         return view('pages.home.index', $viewData);

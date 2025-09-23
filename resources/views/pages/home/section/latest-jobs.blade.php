@@ -4,11 +4,11 @@
             <h2 class="text-3xl md:text-4xl font-bold text-gray-900 capitalize">
                 Lowongan Kerja Terbaru
             </h2>
-            <a href="{{ route('jobs.index') }}" class="mt-4 md:mt-0 text-base font-semibold text-primary hover:underline">
+            <a href="{{ route('jobs.index') }}" class="mt-4 md:mt-0 text-base font-semibold underline text-primary">
                 Lihat Semua
             </a>
         </div>
-        
+
         <div class="space-y-6">
             @forelse ($latestJobs as $job)
             <x-job-card :job="$job" />

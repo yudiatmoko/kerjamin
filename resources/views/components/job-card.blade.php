@@ -3,16 +3,16 @@
 @php
 $isEducation = $variant === 'education';
 
-$widthClass = $isEducation ? 'w-full' : ($variant === 'home' ? 'md:w-1/6' : 'md:w-1/4');
+$widthClass = $isEducation ? 'w-full' : ($variant === 'home' ? 'lg:w-1/4 xl:w-1/6' : 'xl:w-1/4');
 
 $titleClass = $isEducation ? 'text-xl' : 'text-xl md:text-2xl';
 
 $bottomWrapper = $isEducation
 ? 'mt-auto flex flex-col gap-6'
-: 'mt-auto flex flex-col md:flex-row md:justify-between md:items-center gap-6';
+: 'mt-auto flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6';
 
-$buttonWrapper = $isEducation ? 'w-full text-center' : 'w-full md:w-auto text-center md:text-right';
-$buttonClass = $isEducation ? 'w-full inline-block' : 'w-full md:w-auto inline-block';
+$buttonWrapper = $isEducation ? 'w-full text-center' : 'w-full lg:w-auto text-center lg:text-right';
+$buttonClass = $isEducation ? 'w-full inline-block' : 'w-full lg:w-auto inline-block';
 @endphp
 
 @if ($job)

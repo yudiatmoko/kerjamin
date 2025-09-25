@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="relative dots-wrapper">
-                    <div class="scroll-container grid grid-flow-col auto-cols-[100%] sm:auto-cols-[50%] md:auto-cols-[15%] lg:auto-cols-[25%] xl:auto-cols-[20%] gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10">
+                    <div class="scroll-container grid grid-flow-col auto-cols-[100%] sm:auto-cols-[50%] md:auto-cols-[50%] lg:auto-cols-[35%] xl:auto-cols-[20%] gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-10">
                         @forelse ($education['jobs'] as $job)
                         <div class="snap-start">
                             <x-job-card :job="$job" variant="education" />

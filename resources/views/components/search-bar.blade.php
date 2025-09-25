@@ -1,4 +1,4 @@
-<form action="{{ route('jobs.index') }}" method="GET" class="w-full max-w-4xl mx-auto">
+<form id="job-search-form" action="{{ route('jobs.index') }}" method="GET" class="w-full max-w-4xl mx-auto">
     <div class="bg-white p-6 md:p-2 rounded-xl shadow-lg flex flex-col md:flex-row items-center overflow-hidden">
 
         <div class="w-full flex flex-col md:flex-row">
@@ -23,7 +23,7 @@
             </div>
 
             <div class="w-full p-3 flex-3 relative">
-                <select name="education" class="w-full text-base font-medium text-gray-800 bg-white border-b-2 border-gray-200 
+                <select name="educations[]" class="w-full text-base font-medium text-gray-800 bg-white border-b-2 border-gray-200 
                md:border-b-0 md:border-r-3 focus:outline-none focus:border-primary transition duration-300 
                appearance-none pr-6 truncate">
                     <option value="">Semua Pendidikan</option>
@@ -46,3 +46,17 @@
 
     </div>
 </form>
+
+<script>
+    document.getElementById('job-search-form').addEventListener('submit', function(e) {
+        const form = e.target;
+        const inputs = form.querySelectorAll('input, select');
+
+        inputs.forEach(input => {
+            if (!input.value) {
+                input.name = '';
+            }
+        });
+    });
+
+</script>

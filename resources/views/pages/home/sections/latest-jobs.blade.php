@@ -11,7 +11,7 @@
 
         <div class="space-y-6">
             @forelse ($latestJobs as $job)
-            <x-job-card :job="$job" />
+            <x-job-card :job="$job" variant="home" />
             @empty
             <div class="bg-white p-8 rounded-lg shadow-md text-center">
                 <p class="text-gray-600">Saat ini belum ada lowongan kerja terbaru.</p>

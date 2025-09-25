@@ -71,8 +71,13 @@ class HomeController extends Controller
                 ->take(5)
                 ->get();
 
+
             if ($jobs->isNotEmpty()) {
-                $jobsByEducation->put($level->name, $jobs);
+                $jobsByEducation->push([
+                    'name' => $level->name,
+                    'slug' => $level->slug,
+                    'jobs' => $jobs,
+                ]);
             }
         }
 
